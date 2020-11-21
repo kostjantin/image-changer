@@ -4,11 +4,12 @@ use Gumlet\ImageResize;
 
 require_once "vendor/autoload.php";
 
-define('IMAGE_WIDTH', 762);
-define('IMAGE_HEIGHT', 1100);
-define('MAIN_FOLDER_PATH', 'images');
+define('MAIN_FOLDER_PATH', $arv[1] ?? 'images');
+define('IMAGE_WIDTH', $argv[2] ?? 1);
+define('IMAGE_HEIGHT', $argv[3] ?? 1);
+define('TYPE_PROCESSING', $argv[4] ?? 'resize');
 
-define('NEW_DIR', createDir('img-' . date('Ymd.His') . DIRECTORY_SEPARATOR));
+define('NEW_DIR', createDir(MAIN_FOLDER_PATH . '-' . date('Ymd.His') . DIRECTORY_SEPARATOR));
 define('NEW_TMP_DIR', createDir(NEW_DIR . '_tmp' . DIRECTORY_SEPARATOR));
 
 function recursiveReadDir(string $dir): void
@@ -27,7 +28,11 @@ function recursiveReadDir(string $dir): void
             continue;
         }
 
-        resizeImage($fileInfo);
+        if (TYPE_PROCESSING === 'resize') {
+            resizeImage($fileInfo);
+        } elseif (TYPE_PROCESSING === 'crop') {
+            cropAndResizeImage($fileInfo);
+        }
     }
 }
 
