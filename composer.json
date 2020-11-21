@@ -1,0 +1,17 @@
+{
+  "name": "kosty/image-resize",
+  "authors": [
+    {
+      "name": "kostjantin",
+      "email": "kostjantin@gmail.com"
+    }
+  ],
+  "require": {
+    "gumlet/php-image-resize": "^2.0",
+    "ext-gd": "*",
+    "ext-fileinfo": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  }
+}
